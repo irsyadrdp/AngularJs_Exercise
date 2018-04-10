@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 3</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="description" content="Demo project">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="angular.min.js"></script>
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+		<style type="text/css"></style>
+	</head>
+	<body ng-app>
+
+		<div style="background-color: {{ colors }}; width: 200px;">
+			<P>Input desire color here:</P>
+			<input type="text" ng-model="colors">
+			<br/><hr/>
+			
+
+			<P>Numbers</P>
+			<span>{{ 10*20%7 }}</span>	
+			<br/><hr/>
+
+			<P>String</P>
+			<span>{{ "The number is : " + 19 }}</span>
+			<br/><hr/>
+
+			<P>Arrays</P>
+			<span ng-init="majors=['Computer Science', 'Information System', 'Informatics']">
+				{{ "Major : " + majors[0] }}
+				{{ "Major : " + majors[1] }}
+				{{ "Major : " + majors[2] }}
+			</span>
+			<br/><hr/>
+
+			<P>Objects</P>
+			<span ng-init="user={name:'John', age:19}">
+				{{ "Name : " + user.name + ", Age : " + user.age }}
+			</span>
+
+		</div>
+
+	</body>
+	<script type="text/javascript"></script>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 9</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="description" content="Demo project">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="angular.min.js"></script>
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+		
+		<style type="text/css">
+			.result{
+				max-width: 400px;
+				height: 200px;
+				box-sizing: border-box;
+				padding: 5px;
+			}	
+			.result span{
+				cursor: pointer;
+			}
+			.input{
+				max-width: 400px;
+				border: 1px solid #000;
+				box-sizing: border-box;
+				padding: 10px;
+			}
+			.input input{
+				padding: 5px;
+				width: 80%;
+			}
+		</style>
+
+	</head>
+	
+	<body ng-app="myApps" ng-controller="boxController">
+		<div class="input">
+			<input type="text" ng-keyup="check($event)" ng-model="tag" placeholder="Input tag and seperate it with comma">
+		</div>
+		<div class="result" style="background-color: rgb({{ r+','+g+','+b }})">
+			<span ng-click="remove($index)" ng-repeat="tag in tags">{{ tag + ", " }}</span>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		var app = angular.module("myApps", []);
+
+		app.controller("boxController", function($scope){
+			$scope.changeColor = function(){
+				$scope.r = Math.floor(Math.random()*255);
+				$scope.g = Math.floor(Math.random()*255);
+				$scope.b = Math.floor(Math.random()*255);
+			};
+			$scope.tags = [];
+			$scope.check = function(keyCode){
+				if(keyCode.which==188 || keyCode.which==13){
+					$scope.tag = ($scope.tag+ '').substr(0, ($scope.tag+ '').length-1);
+					$scope.tags.push($scope.tag);
+					$scope.tag = "";
+				}
+			}
+			$scope.remove = function(index){
+				$scope.tags.splice(index, 1);
+				$scope.changeColor();
+			}
+			$scope.changeColor();
+		});
+	</script>
+</html>

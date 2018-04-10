@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 7</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="description" content="Demo project">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="angular.min.js"></script>
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+		<style type="text/css"></style>
+	</head>
+
+	<body ng-app="myApps" ng-controller="footballController">
+		<p>Search : <input type="text" ng-model="keyword"></p>
+		<table border=1>
+			<thead>
+				<tr>
+					<th><input type="text" ng-model="name"></th>
+					<th>
+						<select ng-model="team" ng-options="team for team in teams">
+						</select>
+					</th>
+					<th><input type="number" ng-model="goal"></th>
+					<th><button ng-click="insert()">Add</button></th>
+				</tr>
+				<tr>
+					<th>Name</th>
+					<th>Team</th>
+					<th>Goal</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-show="filteredData==0">
+					<td colspan="4">No Data !</td>
+				</tr>
+				<tr ng-repeat="player in players | filter:{ name:keyword } as filteredData">
+					<td>{{ player.name }}</td>
+					<td>{{ player.team }}</td>
+					<td>{{ player.goal }}</td>
+					<td><a href="#" ng-click="delete($index)">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>	
+	</body>
+	
+	<script type="text/javascript">
+		var app = angular.module("myApps",[]);
+
+		app.controller("footballController", function($scope){
+			$scope.players = [
+				{name: "Hazard", goal: 20, team: "Chelsea"},
+				{name: "Alexis Sanchez", goal: 15, team: "Barcelona"},
+				{name: "Joe Hart", goal: 0, team: "Manchester City"},
+				{name: "Ibrahimovic", goal: 17, team: "Manchester United"},
+				{name: "Lionel Messi", goal: 5, team: "Barcelona"},
+				{name: "Cristiano Ronaldo", goal: 24, team: "Real Madrid"},
+			];
+
+			$scope.teams = [
+				"Chelsea","Barcelona","Manchester United","Manchester City","Real Madrid","Arema","Inter Milan",
+			];
+
+			$scope.insert = function(){
+				$scope.players.push({
+					name: $scope.name, 
+					team: $scope.team, 
+					goal: $scope.goal,
+				});
+				$scope.clearForm();
+			}
+
+			$scope.clearForm = function(){
+				$scope.name="";
+				$scope.team="";
+				$scope.goal="";
+			}
+
+			$scope.delete = function(index){
+				$scope.players.splice(index, 1);
+			}
+		});
+	</script>
+</html>

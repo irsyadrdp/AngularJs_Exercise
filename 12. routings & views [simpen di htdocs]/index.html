@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="description" content="Demo project">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="angular.min.js"></script>
+		<script src="angular-route.min.js"></script>
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+		<style type="text/css"></style>
+	</head>
+
+	<body ng-app="myApps">
+		<div ng-include="'menu.html'"></div>
+		<ng-view></ng-view>
+	</body>
+	
+	<script type="text/javascript">
+		var app = angular.module("myApps", ['ngRoute']);
+
+		app.config(function($routeProvider, $locationProvider){
+			$locationProvider.hashPrefix('');
+			$routeProvider
+			.when("/", {
+				template : "<h1>Welcome Home</h1>"
+			})
+			.when("/view", {
+				templateUrl : "view.html"
+			})
+			.when("/add", {
+				templateUrl : "add.html"
+			})
+			.when("/edit/:userID", {
+				templateUrl : "edit.html",
+				controller : "userController"
+			})
+			.otherwise({
+				templateUrl : "404.html"
+				// redirectTo : "/" //homepage
+			})
+		});
+
+		app.controller("userController", function($scope, $routeParams){
+			$scope.id = $routeParams.userID;
+		});
+
+	</script>
+</html>

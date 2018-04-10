@@ -1,0 +1,16 @@
+<div class="posts">
+	Title : {{ post.title }}<br>
+	Content : {{ post.body }}<br>
+</div>
+
+<h1>Comments</h1>
+<table width="50%" border="1" cellspacing="0" cellpadding="5">
+		<tr ng-repeat="comment in comments">
+			<td>
+				Name : {{ comment.name }} | Email : {{ comment.email }} 
+				<br>
+				{{ comment.body }}
+				<br>
+			</td>
+		</tr>
+</table>

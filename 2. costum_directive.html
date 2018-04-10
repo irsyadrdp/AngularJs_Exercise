@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 2</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="description" content="Demo project">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="angular.min.js"></script>
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+		<style type="text/css"></style>
+	</head>
+
+	<body ng-app="myApp" ng-controller="testCtrl">
+		
+		<P>1. Element Directive</P>
+		<my-directive-e></my-directive-e>	
+		<br/>
+
+		<P>2. Attribute Directive</P>
+		<div my-directive-a></div>
+		<br/>
+
+		<P>3. Class Directive</P>
+		<div class="my-directive-c"></div>
+		<br/>
+
+		<P>4. Comment Directive</P>
+		<!-- directive:my-directive-m -->
+
+	</body>
+	
+	<script type="text/javascript">
+		var app = angular.module("myApp", []);
+
+		app.directive("myDirectiveE", function(){
+			return{
+				restrict : 'E', //default
+				template : "<h3>{{ materialE }}</h3>"
+			}
+		})
+		app.directive("myDirectiveA", function(){
+			return{
+				restrict : 'A', //default
+				template : "<h3>{{ materialA }}</h3>"
+			}
+		})
+		app.directive("myDirectiveC", function(){
+			return{
+				restrict : 'C', //default
+				template : "<h3>{{ materialC }}</h3>"
+			}
+		})
+		app.directive("myDirectiveM", function(){
+			return{
+				restrict : 'M', //default
+				template : "<h3>{{ materialM }}</h3>"
+			}
+		})
+
+		app.controller("testCtrl", function($scope){
+			$scope.materialE = "Hello JS (E)!";
+			$scope.materialA = "Hello JS (A)!";
+			$scope.materialC = "Hello JS (C)!";
+			$scope.materialM = "Hello JS (M)!";
+		})
+	</script>
+
+</html>

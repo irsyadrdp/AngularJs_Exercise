@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 11</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="description" content="Demo project">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="angular.min.js"></script>
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+		<style type="text/css"></style>
+	</head>
+
+	<body ng-app="myApps" ng-controller="registerController">
+		<form name="userForm">
+			<table>
+				<tr>
+					<td>Name</td>
+					<td>:</td>
+					<td><input type="text" name="nameInput" ng-model="user.name" required></td>
+				</tr>
+				<tr>
+					<td>Gender</td>
+					<td>:</td>
+					<td>
+						<input type="radio" name="radioGender" ng-model="user.gender" value="Male" required>Male
+						<input type="radio" name="radioGender" ng-model="user.gender" value="Female" required>Female
+					</td>
+				</tr>
+				<tr>
+					<td>Age</td>
+					<td>:</td>
+					<td><input type="number" name="ageInput" ng-model="user.age" required></td>
+				</tr>
+				<tr>
+					<td>Country</td>
+					<td>:</td>
+					<td><select name="countrySelect" ng-model="user.country" ng-options="country for country in countries" required></select></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td>:</td>
+					<td><textarea name="addressInput" ng-model="user.address" required></textarea></td>
+				</tr>
+				<tr>
+					<td>Blog</td>
+					<td>:</td>
+					<td><input type="url" name="blogInput" ng-model="user.blog" required></td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<button ng-disabled="userForm.$invalid">Save</button>
+						<button ng-click="reset()">Reset</button>
+					</td>	
+				</tr>
+			</table>
+			
+			<span ng-show="userForm.nameInput.$invalid && userForm.nameInput.$dirty">Name can't be empty</span>
+			<span ng-show="userForm.ageInput.$invalid && userForm.ageInput.$dirty">Age can't be empty</span>
+			<span ng-show="userForm.radioGender.$invalid && userForm.radioGender.$dirty">Gender must be selected</span>
+			<span ng-show="userForm.countrySelect.$invalid && userForm.countrySelect.$dirty">Country must be selected</span>
+			<span ng-show="userForm.addressInput.$invalid && userForm.addressInput.$dirty">Address must be filled</span>
+			<span ng-show="userForm.blogInput.$invalid && userForm.blogInput.$dirty">Not a url format</span>
+
+			<span ng-show="user.age < 17 && userForm.ageInput.$dirty">Age must be older than 17</span>
+
+		</form>
+
+		<p>
+			{{ user | json }}
+		</p>
+
+
+	</body>
+	
+	<script type="text/javascript">
+		var app = angular.module("myApps", []);
+
+		app.controller("registerController", function($scope){
+			$scope.countries = ["Indonesia","Singapore","Malaysia","Japan"];
+			$scope.defaultValue = {
+				name : "John Doe",
+				gender : "Male",
+				age : 20,
+				country : "Indonesia",
+				address : "Jln. Raya",
+				blog : "http://www.mahirkoding.com",
+			}
+			$scope.reset = function(){
+				$scope.user = angular.copy($scope.defaultValue);
+			}
+		});
+	</script>
+</html>

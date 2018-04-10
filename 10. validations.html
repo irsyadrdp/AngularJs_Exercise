@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 10</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="description" content="Demo project">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="angular.min.js"></script>
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+		<style type="text/css"></style>
+	</head>
+
+	<body ng-app="myApps">
+		<div ng-controller="basicValid">
+			isNumber? {{ isnumber }} <br/>
+			isString? {{ isstring }} <br/>
+			isObject? {{ isobject }} <br/>
+			isArray? {{ isarray }} <br/>
+			isFunction? {{ isfunction }} <br/>
+			isDefined? {{ isdefined }} <br/>
+			isUndefined? {{ isundefined }} <br/>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		var app = angular.module("myApps", []);
+
+		app.controller("basicValid", function($scope){
+			function a(){
+				alert("a");
+			}
+
+			var temp = {name:"Bluejack"};
+			var unknown;
+
+			$scope.isnumber = angular.isNumber(2); //true
+			$scope.isstring = angular.isString("2"); //true
+			$scope.isobject = angular.isObject(temp); //true
+			$scope.isarray = angular.isArray(temp); //false
+			//note : in javascript, array also an object, but object not an array
+
+			$scope.isfunction = angular.isFunction(a); //true
+			$scope.isdefined = angular.isDefined(unknown); //true
+			$scope.isundefined = angular.isUndefined(unknown); //true
+		});
+	</script>
+</html>
